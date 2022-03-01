@@ -36,7 +36,7 @@ class TeacherRegistration(View):
             user.save()
             messages.success(
                 request,
-                "Successfully registered as one of the Country Livers Industrial "
+                "Successfully registered as one of the Country Livers Agricultural "
                 + "Training Institute Teachers",
             )
             return HttpResponseRedirect("/")
@@ -47,12 +47,12 @@ class TeacherRegistration(View):
 class TeacherListView(generic.ListView):
     template_name = "roles/list.html"
     queryset = Teacher.objects.all()
+    context_object_name = "object_list"
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["data"] = "teacher"
-        context["object_list"] = self.queryset
         return context
 
 
@@ -78,7 +78,7 @@ class BusinessRegistration(View):
             messages.success(
                 request,
                 "You have successfully registered your business with "
-                + "Country Livers Industrial Training Institute",
+                + "Country Livers Agricultural Training Institute",
             )
             return HttpResponseRedirect("/")
 
@@ -107,12 +107,12 @@ class ClassRegistration(View):
 class ClassListView(generic.ListView):
     template_name = "roles/list.html"
     queryset = Class.objects.all()
+    context_object_name = "object_list"
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["data"] = "class"
-        context["object_list"] = self.queryset
         return context
 
 
@@ -153,12 +153,12 @@ class StudentRegistration(View):
 class StudentListView(generic.ListView):
     template_name = "roles/list.html"
     queryset = Student.objects.all()
+    context_object_name = "object_list"
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["data"] = "student"
-        context["object_list"] = self.queryset
         return context
 
 

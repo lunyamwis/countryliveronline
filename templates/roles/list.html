@@ -10,83 +10,94 @@
     <hr>
     <table class="table">
         <thead class="thead-dark">
-            {% if data == 'minister' %}
+            {% if data == 'teacher' %}
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Church</th>
-                <th scope="col">Events</th>
-                <th scope="col">Invite</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Location</th>
+                <th scope="col">Class</th>
+                <th scope="col">Actions</th>
             </tr>
-            {% elif data == 'ministry' %}
+            {% elif data == 'student' %}
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Church</th>
-                <th scope="col">Events</th>
-                <th scope="col">Invite</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Location</th>
+                <th scope="col">Class</th>
+                <th scope="col">Actions</th>
             </tr>
             {% else %}
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Field</th>
-                <th scope="col">Event Name</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Starting Time</th>
+                <th scope="col">Ending Time</th>
             </tr>
             {% endif %}
         </thead>
         <tbody>
-            {% if data == 'minister' %}
+            {% if data == 'teacher' %}
             {% for obj in object_list %}
             <tr>
                 <th scope="row">{{obj.pk}}</th>
-                <td>{{obj.name}}</td>
-                <td>{{obj.home_church_name}}</td>
-
-                {% if obj.fields.all %}
+                <td>{{obj.first_name}}&nbsp;{{obj.middle_name}}&nbsp;{{obj.last_name}}</td>
+                <td>{{obj.phone_number}}</td>
+                <td>{{obj.email}}</td>
+                <td>{{obj.location}}</td>
+                {% if obj.class_set.all %}
                 <td>
-                    {% for event in obj.fields.all %}
+                    {% for class in obj.class_set.all %}
+                    {% if forloop.last %}
                     <li>
-                        <ul>{{event.get_field_display}}</ul>
-                        <ul>{{event.event_name}}</ul>
+                        <ul>{{class.name}}</ul>
+                        <ul>{{class.get_class_category_display}}</ul>
                     </li>
+                    {% endif %}
                     {% endfor %}
                 </td>
                 {% else %}
-                <td>no events</td>
+                <td>no classes</td>
                 {% endif %}
-                <td><a href="{% url 'evangelism:field' obj.name %}"> <button
-                            class="btn btn-sm btn-success">Invite</button></a></td>
+                <td><a href="#"> <button class="btn btn-sm btn-success">View</button></a></td>
             </tr>
             {% endfor %}
-            {% elif data == 'ministry' %}
+            {% elif data == 'student' %}
             {% for obj in object_list %}
             <tr>
                 <th scope="row">{{obj.pk}}</th>
-                <td>{{obj.name}}</td>
-                <td>{{obj.conference_name}}</td>
-
-                {% if obj.fields.all %}
-                {% for event in obj.fields.all %}
+                <td>{{obj.first_name}}&nbsp;{{obj.middle_name}}&nbsp;{{obj.last_name}}</td>
+                <td>{{obj.phone_number}}</td>
+                <td>{{obj.email}}</td>
+                <td>{{obj.location}}</td>
+                {% if obj.student_class %}
                 <td>
                     <li>
-                        <ul>{{event.get_field_display}}</ul>
-                        <ul>{{event.event_name}}</ul>
+                        <ul>{{obj.student_class.name}}</ul>
+                        <ul>{{obj.student_class.get_class_category_display}}</ul>
                     </li>
                 </td>
-                {% endfor %}
                 {% else %}
-                <td>no events</td>
+                <td>no classes</td>
                 {% endif %}
-                <td><a href="{% url 'evangelism:field' obj.name %}"> <button
-                            class="btn btn-sm btn-success">Invite</button></a></td>
+                <td><a href="#"> <button class="btn btn-sm btn-success">View</button></a></td>
             </tr>
             {% endfor %}
             {% else %}
             {% for obj in object_list %}
             <tr>
+
                 <th scope="row">{{obj.pk}}</th>
-                <td>{{obj.get_field_display}}</td>
-                <td>{{obj.event_name}}</td>
+                <td>{{obj.name}}</td>
+                <td>{{obj.get_class_category_display}}</td>
+                <td>{{obj.teacher.first_name}}&nbsp;{{obj.teacher.last_name}}</td>
+                <td>{{obj.started_time}}</td>
+                <td>{{obj.ending_time}}</td>
             </tr>
             {% endfor %}
             {% endif %}
