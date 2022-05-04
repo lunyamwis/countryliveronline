@@ -47,7 +47,6 @@ django-restframework==0.0.1
 django-role-permissions==3.1.1
 django-timezone-field==4.2.1
 django-tinymce4-lite==1.7.4
-django.js==0.8.1
 djangorestframework==3.12.4
 docutils==0.18.1
 entrypoints==0.4
