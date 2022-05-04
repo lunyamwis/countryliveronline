@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "tinymce.apps.TinyMCEConfig",
     "marketing",
     "posts",
+    "documentation",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

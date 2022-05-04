@@ -36,7 +36,7 @@ class TeacherRegistration(View):
             user.save()
             messages.success(
                 request,
-                "Successfully registered as one of the Country Livers Agricultural "
+                "Successfully registered as one of the Country Livers Manual And Domestic Labor "
                 + "Training Institute Teachers",
             )
             return HttpResponseRedirect("/")
@@ -78,7 +78,7 @@ class BusinessRegistration(View):
             messages.success(
                 request,
                 "You have successfully registered your business with "
-                + "Country Livers Agricultural Training Institute",
+                + "Country Livers Manual And Domestic Labor Training Institute",
             )
             return HttpResponseRedirect("/")
 
