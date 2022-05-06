@@ -1,8 +1,10 @@
 # Create your views here.
+import csv
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import FetchClientsForm
@@ -104,3 +106,19 @@ def fetch_clients(request, *args, **kwargs):
         form = FetchClientsForm()
 
     return render(request, "clients/fetch.html", {"form": form})
+
+
+def export_users_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="prospective_clients.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["name", "address", "website", "link", "phone_numbers"])
+
+    users = Client.objects.all().values_list(
+        "name", "address", "website", "link", "phone_numbers"
+    )
+    for user in users:
+        writer.writerow(user)
+
+    return response
