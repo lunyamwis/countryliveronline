@@ -42,6 +42,7 @@ urlpatterns = [
     path("payment/", include("payment.urls")),
     path("payments/", include("payments.urls")),
     path("documentation/", include("documentation.urls", namespace="documentation")),
+    path("clients/", include("clients.urls", namespace="clients")),
     path("paypal/", include("paypal.standard.ipn.urls")),
 ]
 
