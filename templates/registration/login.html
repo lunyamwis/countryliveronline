@@ -1,0 +1,32 @@
+{% extends "shared/layout.html" %}
+{% block eyebrow %}Authentication{% endblock %}
+{% block page_title %}Login{% endblock %}
+{% block page_subtitle %}Sign in to create/edit/delete records{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body p-3 p-md-4">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            {{ form.password }}
+          </div>
+          <button class="btn btn-success w-100">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll("input").forEach(el => el.classList.add("form-control"));
+</script>
+{% endblock %}
